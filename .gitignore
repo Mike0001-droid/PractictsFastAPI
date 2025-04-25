@@ -1,0 +1,8 @@
+env/
+.env/
+venv/
+.venv/
+.env
+app/__pycache__
+app/routers/__pycache__
+practics/__pycache__
