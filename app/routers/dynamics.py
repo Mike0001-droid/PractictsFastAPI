@@ -10,8 +10,8 @@ from cache import cache_response
 
 router = APIRouter(prefix="/dynamics", tags=["dynamics"])
 
-@router.get("/", response_model=list[TradeResultSchema])
 @cache_response
+@router.get("/", response_model=list[TradeResultSchema])
 def get_dynamics(
     oil_id: Optional[str] = Query(None, description="Фильтр по oil_id"),
     delivery_type_id: Optional[str] = Query(None, description="Фильтр по delivery_type_id"),
@@ -31,5 +31,5 @@ def get_dynamics(
         query = query.filter(TradeResult.delivery_type_id == delivery_type_id)
     if delivery_basis_id:
         query = query.filter(TradeResult.delivery_basis_id == delivery_basis_id)
-    
-    return query.order_by(TradeResult.date.desc()).all()
+    result = query.order_by(TradeResult.id.desc()).limit(5)
+    return result

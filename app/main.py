@@ -18,9 +18,9 @@ async def run_periodically():
             print("Cache cleared at 14:11")
         await asyncio.sleep(60)  
 
-@app.on_event("startup")
-async def startup_event():
-    asyncio.create_task(run_periodically())
+# @app.on_event("startup")
+# async def startup_event():
+#     asyncio.create_task(run_periodically())
 
 @app.get("/")
 def read_root():

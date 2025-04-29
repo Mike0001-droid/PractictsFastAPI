@@ -16,11 +16,16 @@ def get_trading_results(
     delivery_basis_id: Optional[str] = Query(None, description="Фильтр по delivery_basis_id"),
     db: Session = Depends(get_db)
 ):
-    last_date = db.query(TradeResult.date).order_by(TradeResult.date.desc()).first()
+    last_date = db.query(TradeResult.date).order_by(
+        TradeResult.date.desc()
+    ).first()
+    
     if not last_date:
         return []
     
-    query = db.query(TradeResult).filter(TradeResult.date == last_date[0])
+    query = db.query(TradeResult).filter(
+        TradeResult.date == last_date[0]
+    )
     
     if oil_id:
         query = query.filter(TradeResult.oil_id == oil_id)
